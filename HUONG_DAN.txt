@@ -1,0 +1,115 @@
+PHẦN MỀM TRA CỨU HỒ SƠ — HƯỚNG DẪN NHANH (bản 1.0.2)
+==========================================
+
+1. CÀI ĐẶT (làm 1 lần)
+   - Giải nén thư mục TraCuuHoSo ra một chỗ NGOÀI thư mục hồ sơ, ví dụ D:\TraCuuHoSo
+     (phần mềm sẽ từ chối chạy nếu nằm bên trong thư mục hồ sơ).
+   - Nháy đúp CAI_DAT.bat. File này sẽ:
+       + cài Python 3.12 nếu máy chưa có (qua winget),
+       + tạo môi trường riêng .venv và cài thư viện PyMuPDF, openpyxl,
+       + kiểm tra Tesseract-OCR, nếu chưa có thì hỏi để cài tự động,
+       + tạo lối tắt "Tra cuu ho so" ngoài Desktop.
+   - Dữ liệu OCR tiếng Việt (vie.traineddata, bản chính xác cao) đã kèm sẵn trong thư mục tessdata.
+
+2. LẬP CHỈ MỤC (lần đầu lâu, các lần sau chỉ xử lý file mới/đã sửa)
+   - Mở phần mềm → tab "Chỉ mục". Thư mục <thu-muc-ho-so> đã được cài sẵn.
+   - Bấm "Cập nhật chỉ mục".
+       + Trang PDF có chữ: rất nhanh.
+       + Trang scan phải OCR: khoảng 2–3 giây/trang cho mỗi luồng CPU.
+         Máy 8 luồng ≈ 150–200 trang/phút. Bộ hồ sơ du an có thể mất vài giờ → để chạy qua đêm.
+   - Có thể bấm "Dừng" hoặc tắt phần mềm bất cứ lúc nào, lần sau chạy tiếp đúng trang đang dở.
+   - Vừa lập chỉ mục vừa tìm được (tìm trong các trang đã xử lý).
+   - Muốn ưu tiên vài file: chọn file trong danh sách (giữ Ctrl) → "Chỉ xử lý file đã chọn".
+
+3. TÌM KIẾM
+   - Gõ từ khoá, nhấn Enter. Mặc định tìm KHÔNG DẤU: gõ "coc khoan nhoi" ra cả "cọc khoan nhồi".
+     (Nên dùng không dấu vì OCR đôi khi sai dấu.)
+   - "Phân biệt dấu": chỉ lấy đúng chữ có dấu như đã gõ.
+   - "Cả cụm từ liền nhau": các từ phải đứng liền nhau đúng thứ tự.
+   - Cú pháp:  "cụm từ"   -từ_loại_trừ   từ*  (khớp đầu từ, ví dụ km24*)
+   - Lọc theo tên file/thư mục: ví dụ gõ "II.5" hoặc "hop 6".
+   - Kết quả nhóm theo file, mỗi dòng ghi rõ Trang – Dòng – Nguồn (chữ / OCR).
+     "Dòng" là thứ tự dòng trên trang (với trang scan là dòng do OCR nhận ra).
+   - Bấm 1 kết quả: xem trước trang, dòng khớp được khoanh đỏ, các chỗ khớp khác tô vàng.
+   - Nháy đúp: mở file PDF đúng trang. Hỗ trợ tự nhảy trang với SumatraPDF, Foxit,
+     Adobe Acrobat/Reader, Microsoft Edge (có sẵn trên Windows 10/11). Chọn trong tab "Cài đặt".
+   - Chuột phải: sao chép đường dẫn / dòng kết quả. Nút "Xuất CSV" để mở kết quả bằng Excel.
+
+4. AN TOÀN DỮ LIỆU
+   - Phần mềm chỉ ĐỌC file hồ sơ, không sửa, không tạo file nào trong thư mục hồ sơ.
+   - Chỉ mục, cấu hình, ảnh tạm OCR đều nằm trong thư mục "data" cạnh phần mềm.
+     Xoá thư mục data = xoá toàn bộ chỉ mục (file gốc không bị ảnh hưởng).
+   - Lưu ý: nếu mở file bằng phần mềm đọc PDF rồi bấm Lưu trong đó thì file sẽ bị sửa —
+     việc đó nằm ngoài phần mềm này.
+   - File .rar không được đọc (cần giải nén ra chỗ khác nếu muốn tra cứu).
+
+5. TĂNG TỐC OCR (tab "Cài đặt" và tab "Chỉ mục")
+   - Chất lượng OCR: "Nhanh" (mặc định, dùng vie_fast) nhanh gấp ~2 lần "Chính xác"; đo thử đọc được số từ tương đương.
+   - Phóng ảnh 2.0 lần so với ảnh scan gốc (không phóng lên 300 DPI như bản cũ). Phóng quá lớn làm
+     Tesseract chậm gấp ~3 lần mà còn đọc kém hơn.
+   - Số luồng OCR: mặc định = số luồng CPU − 1. Nếu máy nóng/quạt hú hoặc tốc độ tụt dần, thử giảm
+     xuống bằng một nửa số luồng (CPU nhiều luồng ảo thường không nhanh hơn).
+   - Thanh tiến trình hiển thị tốc độ 2 phút gần nhất, thời gian OCR trung bình mỗi trang và thời gian còn lại.
+   - Quyển không cần tra cứu (khảo sát địa hình, cơ điện hầm, ITS, BIM...): chọn file trong tab "Chỉ mục"
+     → "Bỏ qua file đã chọn". Phần đã đọc vẫn tìm được, "Bao gồm lại" để làm tiếp.
+   - Muốn áp dụng cài đặt mới cho file đã OCR bằng cài đặt cũ: chọn file → "Lập lại từ đầu file đã chọn".
+
+==================== XUẤT MARKDOWN CHO AI (MỚI) ====================
+Mục đích: biến văn bản OCR thành file .md nhẹ để Claude tóm tắt tiếp.
+1. Tab "Chỉ mục" -> chọn 1 hoặc nhiều quyển (Ctrl/Shift) -> "Xuất Markdown cho AI…".
+2. Chọn chế độ (Gọn là khuyên dùng), loại quyển (để "Tự đoán" là được), thư mục xuất
+   (mặc định data\export_md; KHÔNG cho xuất vào thư mục hồ sơ gốc).
+3. Gửi các file .md trong thư mục xuất kèm _PROMPT_tom_tat.md cho Claude để tóm tắt.
+Lưu ý quan trọng:
+ - Quyển văn bản (thuyết minh, hồ sơ mời thầu): .md gần bằng dung lượng chữ OCR; phần "nhẹ" thật
+   sự đến từ bước Claude tóm tắt.
+ - Quyển bản vẽ: chỉ xuất DANH MỤC (tiêu đề + lý trình) vì OCR bản vẽ phần lớn là rác. Rất nhẹ.
+ - Số liệu trong bảng/bản vẽ OCR không đáng tin: trang đánh dấu ⚠ cần đối chiếu ảnh.
+ - Tab "Tìm kiếm": "Xuất .md" lưu các trang kết quả; "Trích PDF" gom đúng các trang đó
+   (tối đa 300) thành 1 PDF nhỏ để gửi Claude xem ảnh.
+
+==================== KIỂM TRA SỐ LIỆU OCR NGHI SAI (MỚI) ====================
+Sau khi OCR xong: tab "Chỉ mục" -> chọn file -> "Kiểm tra số liệu OCR…".
+ - Danh sách ghi rõ file, trang, dòng và lý do nghi sai (số lẫn chữ O/I/l/S/B, dấu . , lạ, lý trình có chữ,
+   bảng số liệu). Bấm vào một dòng để xem ảnh cắt đúng chỗ đó (khung đỏ).
+ - Gõ giá trị đúng vào ô "Giá trị đúng" rồi "Lưu sửa" (Enter), hoặc "Bỏ qua (giữ nguyên OCR)". "Hoàn tác" để làm lại.
+ - Mục cả bảng (không có dòng): đối chiếu ảnh trang rồi bấm "Bỏ qua" khi đã kiểm tra.
+ - Giá trị nhập tay được lưu trong chỉ mục (không sửa file PDF gốc) và dùng khi xuất .md.
+ - File .md xuất ra có mục "BÁO CÁO SỐ LIỆU CHƯA CHẮC CHẮN" ở ĐẦU file: liệt kê các chỗ chưa xử lý
+   (trang/dòng), các chỗ đã nhập tay (cũ -> mới), để Claude biết số nào cần cẩn thận.
+
+==================== SỬA LỖI TÌM KHÔNG RA CHỮ TRONG BẢN VẼ PDF XUẤT TỪ CAD ====================
+Nguyên nhân: (1) PDF dùng font tiếng Việt cũ TCVN3 (.VnTime, VHAVAN…) -> lớp chữ bị lỗi kiểu "thÐp r©u treo lång";
+(2) chữ trong bản vẽ bị vẽ thành nét (SHX), chỉ khung tên là chữ thật -> phần mềm tưởng trang đã có chữ nên không OCR.
+Đã sửa: tự chuyển mã TCVN3 sang Unicode; trang bản vẽ có chữ dạng nét sẽ được OCR bổ sung (loại "chữ+OCR").
+Sau khi chép bản mới: bấm "Cập nhật chỉ mục" — phần mềm tự kiểm tra lại các trang PDF đã lập trước đây
+(nhanh với trang chữ; chỉ OCR thêm các trang bản vẽ có chữ dạng nét).
+
+5. XUẤT TOÀN BỘ OCR RA .MD (bản 1.0.1)
+   - Tab "Chỉ mục" → chọn file (Ctrl/Shift) → "Xuất TOÀN BỘ OCR ra .md…".
+     Không chọn file nào = xuất tất cả file đã lập chỉ mục (có hỏi xác nhận).
+   - Ra mọi trang, mọi dòng, nguyên văn, KHÔNG lọc; mỗi trang có tiêu đề "## Trang N · chữ/OCR".
+   - File UTF-8 có BOM nên Notepad/Excel hiện đúng tiếng Việt. Quyển lớn tự cắt mỗi ~800 KB.
+   - Muốn bản gọn cho AI: dùng "Xuất Markdown cho AI…" (vẫn có chế độ Gọn/Rất gọn/Đầy đủ).
+   - Hiển thị: tự loại ký tự điều khiển/ô vuông khỏi kết quả tìm và khung xem dòng; font tự chọn
+     (Segoe UI/Consolas, thiếu thì Arial/Courier New).
+   - Chữ OCR sai (vd "Đai ắc chồm câu") là do nhận dạng, không phải lỗi hiển thị.
+     Muốn đọc tốt hơn: Cài đặt → Chất lượng OCR = chính xác → "Lập lại từ đầu" file cần.
+
+6. BẢN 1.0.2 — LÀM SẠCH + OCR LẠI BẢNG KHỐI LƯỢNG
+   Làm 1 lần: chạy lại CAI_DAT.bat (cài thêm numpy).
+   a) "OCR lại bảng khối lượng…" (tab Chỉ mục, chọn quyển bản vẽ):
+      - Chỉ xử lý trang "BẢNG TỔNG HỢP KHỐI LƯỢNG" (tự nhận ~29 trang/quyển II.5.x), ~20 giây/trang.
+      - Nắn thẳng trang nghiêng, bỏ mực dấu mộc (đỏ/xanh), xoá đường kẻ ô, tách nửa trái/nửa phải,
+        đọc riêng cột số (đọc 2 lần ở 2 cỡ phóng; lệch nhau thì ghi ⟨alt=…⟩ để bạn đối chiếu).
+      - Chỉ đọc PDF gốc; kết quả ghi vào chỉ mục (không đụng file hồ sơ).
+   b) "Xuất TOÀN BỘ OCR ra .md…" có 2 chế độ:
+      - "Nguyên văn": không lọc gì.
+      - "Đã làm sạch" (mặc định): bỏ dòng rác OCR và dòng tên file CAD đầu trang, sửa dấu từ khóa xây dựng
+        (GÓI→GỐI, CÓT→CỐT, ĐÁT→ĐẤT, CÀU→CẦU, DÀM→DẦM, KÉT→KẾT, TÁN→TẤN…; chỉ chữ IN HOA), bảng THKL
+        thay bằng bảng chuẩn (| Mục | Hạng mục | ĐV | KL | Ghi chú |). Số có dấu ~ ? ⟨alt⟩ là nghi sai: xem ảnh trang.
+   c) Quy trình khuyên dùng: OCR lại bảng khối lượng → xuất "đã làm sạch" → đối chiếu các số ~ ? ⟨alt⟩.
+   d) Lưu ý: hồ sơ có 2 bản trùng quyển II.5.1 (thư mục "HỘP 2" và "QUYỂN II.5 CÁC BẢN VẼ PHẦN CẦU"); nên chọn
+      bản trong "QUYỂN II.5…" (146 MB, nhiều chi tiết hơn bản 28 MB) và "Bỏ qua" bản còn lại.
+   e) Hạn chế còn lại: ảnh chụp nghiêng/cong nặng (vd. tr.151 quyển II.5.1) vẫn đọc thiếu dòng (có cảnh báo ⚠);
+      số 8/6 dễ lẫn khi ảnh mờ (ghi ⟨alt=…⟩); hình học mố/trụ trên bản vẽ phải xem ảnh trang.
