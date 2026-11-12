@@ -1,4 +1,6 @@
-﻿# ocr-cbbk
+> **Repo cu (1.0.2).** Ban moi nhat va duy tri la TraCuuHoSo (1.2.0). Repo nay chi giu lai de tham khao.
+
+# ocr-cbbk
 
 Cong cu tra cuu va OCR ho so (PDF scan) cho du an giao thong, chay tren Windows.
 
