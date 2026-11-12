@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+*.pdf
+*.xlsx
+*.dwg
+*.dxf
+tessdata/
+*.traineddata
+build/
+dist/
+

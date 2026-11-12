@@ -12,11 +12,11 @@ PHẦN MỀM TRA CỨU HỒ SƠ — HƯỚNG DẪN NHANH (bản 1.0.2)
    - Dữ liệu OCR tiếng Việt (vie.traineddata, bản chính xác cao) đã kèm sẵn trong thư mục tessdata.
 
 2. LẬP CHỈ MỤC (lần đầu lâu, các lần sau chỉ xử lý file mới/đã sửa)
-   - Mở phần mềm → tab "Chỉ mục". Thư mục <thu-muc-ho-so> đã được cài sẵn.
+   - Mở phần mềm → tab "Chỉ mục". Thư mục hồ sơ cần tra cứu được thêm bằng nút "Thêm thư mục".
    - Bấm "Cập nhật chỉ mục".
        + Trang PDF có chữ: rất nhanh.
        + Trang scan phải OCR: khoảng 2–3 giây/trang cho mỗi luồng CPU.
-         Máy 8 luồng ≈ 150–200 trang/phút. Bộ hồ sơ du an có thể mất vài giờ → để chạy qua đêm.
+         Máy 8 luồng ≈ 150–200 trang/phút. Bộ hồ sơ lớn có thể mất vài giờ → để chạy qua đêm.
    - Có thể bấm "Dừng" hoặc tắt phần mềm bất cứ lúc nào, lần sau chạy tiếp đúng trang đang dở.
    - Vừa lập chỉ mục vừa tìm được (tìm trong các trang đã xử lý).
    - Muốn ưu tiên vài file: chọn file trong danh sách (giữ Ctrl) → "Chỉ xử lý file đã chọn".
@@ -109,7 +109,7 @@ Sau khi chép bản mới: bấm "Cập nhật chỉ mục" — phần mềm t�
         (GÓI→GỐI, CÓT→CỐT, ĐÁT→ĐẤT, CÀU→CẦU, DÀM→DẦM, KÉT→KẾT, TÁN→TẤN…; chỉ chữ IN HOA), bảng THKL
         thay bằng bảng chuẩn (| Mục | Hạng mục | ĐV | KL | Ghi chú |). Số có dấu ~ ? ⟨alt⟩ là nghi sai: xem ảnh trang.
    c) Quy trình khuyên dùng: OCR lại bảng khối lượng → xuất "đã làm sạch" → đối chiếu các số ~ ? ⟨alt⟩.
-   d) Lưu ý: hồ sơ có 2 bản trùng quyển II.5.1 (thư mục "HỘP 2" và "QUYỂN II.5 CÁC BẢN VẼ PHẦN CẦU"); nên chọn
-      bản trong "QUYỂN II.5…" (146 MB, nhiều chi tiết hơn bản 28 MB) và "Bỏ qua" bản còn lại.
-   e) Hạn chế còn lại: ảnh chụp nghiêng/cong nặng (vd. tr.151 quyển II.5.1) vẫn đọc thiếu dòng (có cảnh báo ⚠);
+   d) Lưu ý: hồ sơ có thể chứa 2 bản trùng của cùng một quyển (thư mục khác nhau); nên chọn
+      bản dung lượng lớn hơn (nhiều chi tiết hơn) và "Bỏ qua" bản còn lại.
+   e) Hạn chế còn lại: ảnh chụp nghiêng/cong nặng vẫn đọc thiếu dòng (có cảnh báo ⚠);
       số 8/6 dễ lẫn khi ảnh mờ (ghi ⟨alt=…⟩); hình học mố/trụ trên bản vẽ phải xem ảnh trang.
